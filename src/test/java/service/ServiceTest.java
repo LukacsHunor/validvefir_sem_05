@@ -66,7 +66,7 @@ class ServiceTest {
     void saveValidHomework() {
         Homework hw = new Homework("77", "some easy homework", 6, 2);
         int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
-        assertEquals(0, result);
+        assertEquals(1, result);
         service.deleteHomework(hw.getID());
     }
 
@@ -79,21 +79,48 @@ class ServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void deleteStudent() {
+    void saveGrade_2() {
+        Student st = new Student("777", "student777", 6);
+        service.saveStudent(st.getID(), st.getName(), st.getGroup());
+
+        Homework hw = new Homework("778", "some easy homework", 6, 2);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+
+        Grade grade = new Grade(new Pair<String, String>("777","778"), 123, 2, "test");
+        int result = service.saveGrade(grade.getID().getObject1(), grade.getID().getObject2(), grade.getGrade(), grade.getDeliveryWeek(), grade.getFeedback());
+        assertEquals(-1, result);
+
+        service.deleteStudent(st.getID());
+        service.deleteHomework(hw.getID());
     }
 
     @org.junit.jupiter.api.Test
-    void deleteHomework() {
-        int result = service.deleteHomework("77");
+    void deleteStudent() {
+        int result = service.deleteStudent("77");
         assertEquals(0, result);
     }
 
     @org.junit.jupiter.api.Test
+    void deleteHomework() {
+        Homework hw = new Homework("77", "some easy homework", 6, 2);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        int result = service.deleteHomework("77");
+        assertEquals(1, result);
+    }
+
+    @org.junit.jupiter.api.Test
     void updateStudent() {
+//        Student hw = new Student("77", "student77", 6);
+//        service.saveStudent(hw.getID(), hw.getName(), hw.getGroup());
+
     }
 
     @org.junit.jupiter.api.Test
     void updateHomework() {
+        Homework hw = new Homework("77", "some easy homework", 6, 2);
+        service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        int result = service.updateHomework("77", "new desc", 6,4);
+        assertEquals(1, result);
     }
 
     @org.junit.jupiter.api.Test

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entities>
+<homework ID="77">
+<Description>new desc</Description>
+<Deadline>6</Deadline>
+<Startline>4</Startline>
+</homework>
 <homework ID="1">
 <Description>File</Description>
 <Deadline>7</Deadline>
