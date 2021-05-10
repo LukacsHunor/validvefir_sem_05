@@ -2,6 +2,7 @@ package service;
 
 import domain.Grade;
 import domain.Homework;
+import domain.Pair;
 import domain.Student;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,10 +50,15 @@ class ServiceTest {
 
     @org.junit.jupiter.api.Test
     void findAllGrades() {
+
     }
 
     @org.junit.jupiter.api.Test
     void saveStudent() {
+        Student hw = new Student("77", "student77", 6);
+        int result = service.saveStudent(hw.getID(), hw.getName(), hw.getGroup());
+        assertEquals(1, result);
+        service.deleteStudent(hw.getID());
     }
 
     @org.junit.jupiter.api.Test
@@ -61,12 +67,15 @@ class ServiceTest {
         Homework hw = new Homework("77", "some easy homework", 6, 2);
         int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
         assertEquals(0, result);
-        //assertTrue(result == 1);
         service.deleteHomework(hw.getID());
     }
 
     @org.junit.jupiter.api.Test
     void saveGrade() {
+        Grade grade = new Grade(new Pair<String, String>("44","55"), 123, 2, "test");
+        int result = service.saveGrade(grade.getID().getObject1(), grade.getID().getObject2(), grade.getGrade(), grade.getDeliveryWeek(), grade.getFeedback());
+        assertEquals(-1, result);
+//        service.deleteGrade(grade.getID());
     }
 
     @org.junit.jupiter.api.Test
@@ -75,6 +84,8 @@ class ServiceTest {
 
     @org.junit.jupiter.api.Test
     void deleteHomework() {
+        int result = service.deleteHomework("77");
+        assertEquals(0, result);
     }
 
     @org.junit.jupiter.api.Test
