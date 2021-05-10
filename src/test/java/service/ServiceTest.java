@@ -75,6 +75,7 @@ class ServiceTest {
         Grade grade = new Grade(new Pair<String, String>("44","55"), 123, 2, "test");
         int result = service.saveGrade(grade.getID().getObject1(), grade.getID().getObject2(), grade.getGrade(), grade.getDeliveryWeek(), grade.getFeedback());
         assertEquals(-1, result);
+//        assertThrows(NullPointerException.class, service.saveGrade(grade.getID().getObject1(), grade.getID().getObject2(), grade.getGrade(), grade.getDeliveryWeek(), grade.getFeedback()));
 //        service.deleteGrade(grade.getID());
     }
 

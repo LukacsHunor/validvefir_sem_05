@@ -47,6 +47,7 @@ public class Service {
     public int saveGrade(String idStudent, String idHomework, double valGrade, int delivered, String feedback) {
         if (studentXmlRepo.findOne(idStudent) == null || homeworkXmlRepo.findOne(idHomework) == null) {
             return -1;
+//            throw new NullPointerException();
         }
         else {
             int deadline = homeworkXmlRepo.findOne(idHomework).getDeadline();
